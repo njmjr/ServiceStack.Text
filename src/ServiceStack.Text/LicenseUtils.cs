@@ -146,6 +146,12 @@ namespace ServiceStack
 
         public static class FreeQuotas
         {
+            //public const int ServiceStackOperations = 100000000;
+            //public const int TypeFields = 100000000;
+            //public const int RedisTypes = 100000000;
+            //public const int RedisRequestPerHour = 100000000;
+            //public const int OrmLiteTables = 100000000;
+            //public const int AwsTables = 100000000;
             public const int ServiceStackOperations = 10;
             public const int TypeFields = 20;
             public const int RedisTypes = 20;
@@ -266,69 +272,69 @@ namespace ServiceStack
             var licensedFeatures = ActivatedLicenseFeatures();
             if ((LicenseFeature.All & licensedFeatures) == LicenseFeature.All) //Standard Usage
                 return;
-
+            return;
             //Free Quotas
-            switch (feature)
-            {
-                case LicenseFeature.Redis:
-                    switch (quotaType)
-                    {
-                        case QuotaType.Types:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.RedisTypes, count, ErrorMessages.ExceededRedisTypes);
-                            return;
-                        case QuotaType.RequestsPerHour:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.RedisRequestPerHour, count, ErrorMessages.ExceededRedisRequests);
-                            return;
-                    }
-                    break;
+            //switch (feature)
+            //{
+            //    case LicenseFeature.Redis:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.Types:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.RedisTypes, count, ErrorMessages.ExceededRedisTypes);
+            //                return;
+            //            case QuotaType.RequestsPerHour:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.RedisRequestPerHour, count, ErrorMessages.ExceededRedisRequests);
+            //                return;
+            //        }
+            //        break;
 
-                case LicenseFeature.OrmLite:
-                    switch (quotaType)
-                    {
-                        case QuotaType.Tables:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.OrmLiteTables, count, ErrorMessages.ExceededOrmLiteTables);
-                            return;
-                    }
-                    break;
+            //    case LicenseFeature.OrmLite:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.Tables:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.OrmLiteTables, count, ErrorMessages.ExceededOrmLiteTables);
+            //                return;
+            //        }
+            //        break;
 
-                case LicenseFeature.Aws:
-                    switch (quotaType)
-                    {
-                        case QuotaType.Tables:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.AwsTables, count, ErrorMessages.ExceededAwsTables);
-                            return;
-                    }
-                    break;
+            //    case LicenseFeature.Aws:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.Tables:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.AwsTables, count, ErrorMessages.ExceededAwsTables);
+            //                return;
+            //        }
+            //        break;
 
-                case LicenseFeature.ServiceStack:
-                    switch (quotaType)
-                    {
-                        case QuotaType.Operations:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.ServiceStackOperations, count, ErrorMessages.ExceededServiceStackOperations);
-                            return;
-                    }
-                    break;
+            //    case LicenseFeature.ServiceStack:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.Operations:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.ServiceStackOperations, count, ErrorMessages.ExceededServiceStackOperations);
+            //                return;
+            //        }
+            //        break;
 
-                case LicenseFeature.Admin:
-                    switch (quotaType)
-                    {
-                        case QuotaType.PremiumFeature:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.PremiumFeature, count, ErrorMessages.ExceededAdminUi);
-                            return;
-                    }
-                    break;
+            //    case LicenseFeature.Admin:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.PremiumFeature:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.PremiumFeature, count, ErrorMessages.ExceededAdminUi);
+            //                return;
+            //        }
+            //        break;
 
-                case LicenseFeature.Premium:
-                    switch (quotaType)
-                    {
-                        case QuotaType.PremiumFeature:
-                            ApprovedUsage(licensedFeatures, feature, FreeQuotas.PremiumFeature, count, ErrorMessages.ExceededPremiumFeature);
-                            return;
-                    }
-                    break;
-            }
+            //    case LicenseFeature.Premium:
+            //        switch (quotaType)
+            //        {
+            //            case QuotaType.PremiumFeature:
+            //                ApprovedUsage(licensedFeatures, feature, FreeQuotas.PremiumFeature, count, ErrorMessages.ExceededPremiumFeature);
+            //                return;
+            //        }
+            //        break;
+            //}
 
-            throw new LicenseException("Unknown Quota Usage: {0}, {1}".Fmt(feature, quotaType)).Trace();
+            //throw new LicenseException("Unknown Quota Usage: {0}, {1}".Fmt(feature, quotaType)).Trace();
         }
 
         public static LicenseFeature GetLicensedFeatures(this LicenseKey key)
